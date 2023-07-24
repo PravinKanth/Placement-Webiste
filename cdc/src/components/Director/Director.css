@@ -1,0 +1,424 @@
+.director-section .director {
+  max-width: 130rem;
+  margin: 0 auto;
+  position: relative;
+}
+.director-section .director .head {
+  display: flex;
+  justify-content: space-between;
+  padding-top: 0.5rem;
+  padding-left: 1rem;
+}
+.director-section .director .head .sidebar {
+  padding: 0;
+  font-family: "Open Sans", Verdana, Geneva, Tahoma, sans-serif;
+  display: flex;
+}
+.director-section .director .head .sidebar .bold {
+  color: #f48e0a !important;
+}
+.director-section .director .head .sidebar .nav, .director-section .director .head .sidebar .menu {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.director-section .director .head .sidebar .menu {
+  justify-content: flex-start;
+}
+.director-section .director .head .sidebar .nav {
+  position: relative;
+  background-color: #fff;
+  padding: 20px;
+  transition: 0.5s;
+  border-radius: 50px;
+  overflow: hidden;
+  background-color: transparent;
+}
+.director-section .director .head .sidebar .menu {
+  margin: 0;
+  padding: 0;
+  width: 0;
+  overflow: hidden;
+  transition: 0.5s;
+}
+.director-section .director .head .sidebar .menu .Btn {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  width: 45px;
+  height: 45px;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  transition-duration: 0.3s;
+  box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.199);
+  background-color: rgb(255, 65, 65);
+  margin-left: 1rem;
+}
+.director-section .director .head .sidebar .menu .sign {
+  width: 100%;
+  transition-duration: 0.3s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.director-section .director .head .sidebar .menu .sign svg {
+  width: 17px;
+}
+.director-section .director .head .sidebar .menu .sign svg path {
+  fill: white;
+}
+.director-section .director .head .sidebar .menu .text {
+  position: absolute;
+  right: 0%;
+  width: 0%;
+  opacity: 0;
+  color: white;
+  font-size: 1.2em;
+  font-weight: 600;
+  transition-duration: 0.3s;
+}
+.director-section .director .head .sidebar .menu .Btn:hover {
+  width: 125px;
+  border-radius: 40px;
+  transition-duration: 0.3s;
+}
+.director-section .director .head .sidebar .menu .Btn:hover .sign {
+  width: 30%;
+  transition-duration: 0.3s;
+  padding-left: 10px;
+}
+.director-section .director .head .sidebar .menu .Btn:hover .text {
+  opacity: 1;
+  width: 50%;
+  transition-duration: 0.3s;
+  padding-right: 10px;
+}
+.director-section .director .head .sidebar .menu .Btn:active {
+  transform: translate(2px, 2px);
+}
+.director-section .director .head .sidebar .nav input:checked ~ .menu {
+  width: 320px;
+}
+.director-section .director .head .sidebar .menu li {
+  list-style: none;
+  margin: 0 10px;
+}
+.director-section .director .head .sidebar .menu li a {
+  text-decoration: none;
+  color: #666;
+  text-transform: uppercase;
+  font-weight: 600;
+  font-size: 0.8rem;
+  transition: 0.5s;
+  cursor: pointer;
+}
+.director-section .director .head .sidebar .menu li a:hover {
+  color: #161919;
+}
+.director-section .director .head .sidebar .nav input {
+  width: 47px;
+  height: 40px;
+  cursor: pointer;
+  opacity: 0;
+}
+.director-section .director .head .sidebar .nav span {
+  position: absolute;
+  left: 24px;
+  width: 30px;
+  height: 4px;
+  border-radius: 50px;
+  background-color: #666;
+  pointer-events: none;
+  transition: 0.5s;
+}
+.director-section .director .head .sidebar .nav input:checked ~ span {
+  background-color: #f974a1;
+}
+.director-section .director .head .sidebar .nav span:nth-child(2) {
+  transform: translateY(-8px);
+}
+.director-section .director .head .sidebar .nav input:checked ~ span:nth-child(2) {
+  transform: translateY(0) rotate(-45deg);
+}
+.director-section .director .head .sidebar .nav span:nth-child(3) {
+  transform: translateY(8px);
+}
+.director-section .director .head .sidebar .nav input:checked ~ span:nth-child(3) {
+  transform: translateY(0) rotate(45deg);
+}
+.director-section .director .head .img-kpr {
+  display: block;
+  width: 15rem;
+}
+.director-section .director .addimage {
+  position: absolute;
+  top: 7rem;
+  left: 4rem;
+  width: 2.5rem;
+  cursor: pointer;
+}
+.director-section .director .addimage:hover {
+  opacity: 0.8;
+}
+.director-section .director .director-content {
+  display: grid;
+  width: 65rem;
+  margin: 0 auto;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+  padding: 3rem;
+  padding-top: 5rem;
+  align-items: center;
+  justify-content: center;
+  padding-left: 10rem;
+}
+.director-section .director .director-content .flip-card {
+  position: relative;
+  background-color: transparent;
+  width: 190px;
+  height: 254px;
+  perspective: 1000px;
+  font-family: sans-serif;
+  cursor: pointer;
+}
+.director-section .director .director-content .flip-card .flip-flex {
+  position: absolute;
+  top: 0.4rem;
+  right: 0.4rem;
+}
+.director-section .director .director-content .flip-card .flip-flex ion-icon {
+  font-size: 1.3rem;
+  padding-right: 0.5rem;
+  color: #575858;
+  transition: all 0.3s;
+}
+.director-section .director .director-content .flip-card .flip-flex ion-icon:hover {
+  color: #ffffff;
+}
+.director-section .director .director-content .detail-title {
+  font-size: 1.5em;
+  font-weight: 900;
+  text-align: center;
+  margin: 0;
+}
+.director-section .director .director-content .detail-title1 {
+  font-size: 1.5em;
+  font-weight: 900;
+  text-align: center;
+  margin: 0;
+  padding-bottom: 2rem;
+}
+.director-section .director .director-content .flip-card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  transition: transform 0.8s;
+  transform-style: preserve-3d;
+}
+.director-section .director .director-content .flip-card:hover .flip-card-inner {
+  transform: rotateY(180deg);
+}
+.director-section .director .director-content .flip-card-front, .director-section .director .director-content .flip-card-back {
+  box-shadow: 0 8px 14px 0 rgba(0, 0, 0, 0.2);
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  border: 1px solid coral;
+  border-radius: 1rem;
+}
+.director-section .director .director-content .flip-card-front {
+  background: linear-gradient(120deg, rgba(255, 127, 80, 0.603) 1%, bisque 60%, rgb(255, 231, 222) 88%, rgb(255, 211, 195) 40%, rgba(255, 127, 80, 0.603) 48%);
+  color: coral;
+}
+.director-section .director .director-content .flip-card-back {
+  background: linear-gradient(120deg, rgb(255, 174, 145) 30%, coral 88%, bisque 40%, rgb(255, 185, 160) 78%);
+  color: white;
+  transform: rotateY(180deg);
+}
+.director-section .director .director-content .cen {
+  margin: 0 auto;
+}
+.director-section .director .director-content .innerdetails {
+  text-align: left;
+}
+.director-section .director .director-content .innerdetails span {
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+.director-section .director .director-content .addcard:hover {
+  background-color: #d4d4d4;
+}
+.director-section .director .director-content .editable-card {
+  width: 15rem;
+  border: 1px solid #ccc;
+  padding: 10px;
+  border-radius: 5px;
+  margin-bottom: 10px;
+}
+.director-section .director .director-content .view-mode h3 {
+  margin-bottom: 5px;
+}
+.director-section .director .director-content .view-mode p {
+  color: #555;
+}
+.director-section .director .director-content .edit-mode input,
+.director-section .director .director-content .edit-mode textarea {
+  width: 100%;
+  margin-bottom: 10px;
+  padding: 5px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+.director-section .director .director-content .edit-mode button {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  padding: 5px 10px;
+  cursor: pointer;
+}
+.director-section .director .director-content .edit-mode button i {
+  margin-right: 5px;
+}
+.director-section .director .director-container {
+  animation: form-animate 0.2s ease forwards;
+  position: absolute;
+  left: 0rem;
+  right: 0;
+  top: 5rem;
+  font-family: "DM Sans", sans-serif;
+  line-height: 1.5;
+  background-color: rgb(255, 255, 255);
+  height: 100vh;
+  padding: 0 2rem;
+}
+.director-section .director .director-container .closebutton {
+  margin-left: auto;
+  font-size: 1.4rem;
+  background-color: rgba(255, 0, 0, 0.769);
+  color: white;
+  padding: 0rem 1.3rem;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+.director-section .director .director-container .closebutton:hover {
+  background-color: red;
+}
+.director-section .director .director-container input {
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
+  border-radius: 0;
+}
+.director-section .director .director-container .just {
+  outline: none;
+  border: none;
+  width: 24.8rem;
+  font: inherit;
+  font-size: 1rem !important;
+  margin-bottom: 1rem !important;
+}
+.director-section .director .director-container .director-card {
+  margin: 2rem auto;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 425px;
+  background-color: #FFF;
+  border-radius: 10px;
+  box-shadow: 0 10px 20px 0 rgba(153, 153, 153, 0.25);
+  padding: 0.75rem;
+}
+.director-section .director .director-container .card-heading {
+  position: absolute;
+  left: 10%;
+  top: 15%;
+  right: 10%;
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: #735400;
+  line-height: 1.222;
+}
+.director-section .director .director-container .card-heading small {
+  display: block;
+  font-size: 0.75em;
+  font-weight: 400;
+  margin-top: 0.25em;
+}
+.director-section .director .director-container .card-form {
+  padding: 2rem 1rem 0;
+}
+.director-section .director .director-container .input {
+  display: flex;
+  flex-direction: column-reverse;
+  position: relative;
+  padding-top: 1.5rem;
+}
+.director-section .director .director-container .input + .input {
+  margin-top: 1.5rem;
+}
+.director-section .director .director-container .ju {
+  margin-top: 0.5rem;
+}
+.director-section .director .director-container .ju1 {
+  margin-top: 1rem;
+}
+.director-section .director .director-container .input-label {
+  color: #8597a3;
+  position: absolute;
+  top: 1.5rem;
+  transition: 0.25s ease;
+}
+.director-section .director .director-container .input-field {
+  border: 0;
+  z-index: 1;
+  background-color: transparent;
+  border-bottom: 2px solid #eee;
+  font: inherit;
+  font-size: 1.125rem;
+  padding: 0.25rem 0;
+}
+.director-section .director .director-container .input-field:focus, .director-section .director .director-container .input-field:valid {
+  outline: 0;
+  border-bottom-color: #6658d3;
+}
+.director-section .director .director-container .input-field:focus + .input-label, .director-section .director .director-container .input-field:valid + .input-label {
+  color: #6658d3;
+  transform: translateY(-1.5rem);
+}
+.director-section .director .director-container .action {
+  margin-top: 2rem;
+}
+.director-section .director .director-container .action-button {
+  font: inherit;
+  font-size: 1.25rem;
+  cursor: pointer;
+  padding: 0.5rem;
+  width: 30%;
+  font-weight: 500;
+  background-color: #6658d3;
+  border-radius: 6px;
+  color: #FFF;
+  border: 0;
+}
+.director-section .director .director-container .action-button:focus {
+  outline: 0;
+}
+@keyframes form-animate {
+  0% {
+    transform: translateX(-3rem);
+  }
+  100% {
+    transform: translateX(0rem);
+  }
+}/*# sourceMappingURL=Director.css.map */

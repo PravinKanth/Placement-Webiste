@@ -1,0 +1,271 @@
+.admin {
+  max-width: 130rem;
+  margin: 0 auto;
+  font-family: "Inter", sans-serif;
+}
+.admin .profile_pic.maximized {
+  width: 40%;
+  height: 90%;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 9999;
+  background-color: rgba(0, 0, 0, 0.8);
+}
+.admin .flex-cont {
+  display: flex;
+  justify-content: space-between;
+}
+.admin .img-kpr {
+  display: block;
+  width: 15rem;
+  padding-left: 0.6rem;
+  padding-top: 0.7rem;
+}
+.admin .btn1 {
+  margin: auto auto;
+  margin-top: 0.8rem;
+  background-color: #f1af64;
+  outline: none;
+  border: none;
+  cursor: pointer;
+  padding: 0.8rem 2rem;
+  border-radius: 4px;
+  transition: all 0.2s;
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+  letter-spacing: 2px;
+  font-weight: 500;
+  margin-right: 1rem;
+}
+.admin .btn1:hover {
+  background-color: #f0a248;
+}
+.admin .placed {
+  font-size: 1.8rem;
+  font-weight: 700;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+}
+.admin .filter {
+  display: flex;
+  gap: 26%;
+  align-items: center;
+}
+.admin .dropdown {
+  margin-left: 2rem;
+  display: inline-block;
+  position: relative;
+}
+.admin .filter-btn {
+  background-color: rgb(235, 235, 235);
+  outline: none;
+  border: none;
+  font-family: inherit;
+  height: 2.4rem;
+  width: 6.9rem;
+  cursor: pointer;
+  border-radius: 8px;
+  font-weight: 500;
+}
+.admin .dept {
+  width: 9rem !important;
+}
+.admin .dept1 {
+  width: 10rem !important;
+}
+.admin .dropdown-content {
+  display: none;
+  position: absolute;
+  font-size: 0.7rem;
+  width: 100%;
+  overflow: auto;
+  box-shadow: 0px 2px 8px 0px rgba(0, 0, 0, 0.4);
+  cursor: pointer;
+  border-radius: 0.4rem;
+  background-color: #FFFFFF;
+}
+.admin .dropdown:hover .dropdown-content {
+  display: block;
+}
+.admin .dropdown-content a {
+  display: block;
+  color: #000000;
+  padding: 5px;
+  text-decoration: none;
+}
+.admin .dropdown-content a:hover {
+  color: #FFFFFF;
+  background-color: #00A4BD;
+}
+.admin .student-table {
+  margin-left: 2rem;
+  margin-top: 3rem;
+  margin-right: 2rem;
+  border-collapse: collapse;
+}
+.admin .student-table th {
+  border: 1px solid #ccc;
+}
+.admin .student-table th:nth-child(1) {
+  padding: 0rem 4rem;
+}
+.admin .student-table th:nth-child(2) {
+  padding: 0rem 6rem;
+}
+.admin .student-table th:nth-child(3) {
+  padding: 0rem 3rem;
+}
+.admin .student-table th:nth-child(4) {
+  padding: 0rem 3rem;
+}
+.admin .student-table th:nth-child(5) {
+  padding: 0rem 3rem;
+}
+.admin .student-table th:nth-child(6) {
+  padding: 0rem 3rem;
+}
+.admin .student-table td {
+  border: 1px solid #ccc;
+  padding-left: 1 rem;
+}
+.admin .student-table td p {
+  font-weight: 700;
+}
+.admin .student-table td p span {
+  font-weight: 700;
+  color: #ed8608;
+}
+.admin p {
+  text-align: left;
+  font-size: 0.7rem;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  font-weight: 600;
+  letter-spacing: 1px;
+  padding-left: 1rem;
+}
+.admin .linkedin {
+  font-size: 1.4rem;
+  color: #0077b5;
+  text-align: left;
+  padding-left: 0.3rem;
+}
+.admin .span {
+  font-size: 0.7rem;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+.admin .salary {
+  font-size: 13px;
+  font-weight: 700;
+  color: #f72d19;
+}
+.admin .profile_pic {
+  width: 120px;
+  height: 150px;
+}
+.admin .search {
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 0 0 11rem;
+  min-width: 200px;
+  min-height: 50px;
+}
+.admin .search *, .admin .search :before, .admin .search :after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font: inherit;
+}
+.admin [id=search-btn] {
+  position: absolute;
+  left: -100vw;
+}
+.admin [id=search-btn] ~ * {
+  --i: var(--pos, 1);
+  --j: calc(1 - var(--i)) ;
+}
+.admin [id=search-btn]:checked ~ * {
+  --pos: 0 ;
+}
+.admin [for=search-btn] {
+  order: 1;
+  overflow: hidden;
+  position: relative;
+  z-index: 2;
+  margin-left: -1.25em;
+  width: 5em;
+  height: 5em;
+  border-radius: 50%;
+  transform: translate(var(--pos, -10em)) rotate(45deg);
+  background: hsl(calc(336 - var(--i) * 269), calc(77% + var(--i) * 2%), calc(49% + var(--i) * 13%));
+  text-indent: -100vw;
+  transition: 0.65s ease-out;
+  cursor: pointer;
+}
+.admin [for=search-btn]:before, .admin [for=search-btn]:after {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin: -0.8125em;
+  width: 1.625em;
+  height: 1.625em;
+  transition: inherit;
+  content: "";
+}
+.admin [for=search-btn]:before {
+  margin-top: -0.08125em;
+  height: 0.203125em;
+  transform-origin: 100% 0;
+  transform: translate(var(--pos, 0.40625em)) scalex(calc(1 - var(--i) * 0.5));
+  background: currentcolor;
+}
+.admin [for=search-btn]:after {
+  border: solid 0.203125em currentcolor;
+  border-radius: calc(var(--i) * 50%);
+  transform: translate(var(--pos, -0.40625em)) scalex(calc(var(--j)*0.125 + var(--i)));
+  box-shadow: inset 0 0 0 calc(var(--j)*0.8125em) currentcolor;
+  transition-property: border-radius, transform, box-shadow;
+  transition-timing-function: cubic-bezier(calc(var(--j) * 0.42), 0, calc(1 - var(--i) * 0.42), 1), cubic-bezier(calc(var(--i) * 0.42), 0, calc(1 - var(--j) * 0.42), 1);
+}
+.admin [id=search-bar] {
+  margin-right: -1.25em;
+  border: none;
+  padding: 0 1em;
+  padding-left: 25px;
+  width: 20em;
+  height: 3.25em;
+  border-radius: 3.25em;
+  transform: translate(var(--pos, 10em));
+  background: #3f324d;
+  --cp: inset(-2em var(--pos, 100%) -2em -2em);
+  -webkit-clip-path: var(--cp);
+  clip-path: var(--cp);
+  color: #fff;
+  font: 1em century gothic, verdana, arial, sans-serif;
+  transition: 0.65s;
+}
+.admin [id=search-bar]::-moz-placeholder {
+  opacity: 0.5;
+  color: inherit;
+  font-size: 0.875em;
+  font-size: 10px;
+  letter-spacing: 1px;
+  text-shadow: 0 0 1px, 0 0 1px;
+}
+.admin [id=search-bar]::placeholder {
+  opacity: 0.5;
+  color: inherit;
+  font-size: 0.875em;
+  font-size: 10px;
+  letter-spacing: 1px;
+  text-shadow: 0 0 1px, 0 0 1px;
+}
+.admin [id=search-bar]:focus {
+  outline: none;
+  background: #ffeacc;
+  color: #000;
+}/*# sourceMappingURL=Admin.css.map */

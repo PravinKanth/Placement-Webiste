@@ -1,0 +1,174 @@
+.login {
+  max-width: 130rem;
+  margin: 0 auto;
+}
+.login .img-kpr {
+  display: block;
+  width: 15rem;
+  padding-left: 0.6rem;
+  padding-top: 0.7rem;
+}
+.login .login-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  max-width: 100rem;
+  margin: 0 auto;
+  height: 40rem;
+  gap: 3rem;
+}
+.login .login-container .img-login {
+  display: block;
+  width: 28rem;
+  margin: auto auto;
+  animation: log 7s infinite ease-in;
+}
+@keyframes log {
+  0% {
+    transform: translateY(-2rem);
+  }
+  50% {
+    transform: translateY(-1rem);
+  }
+  100% {
+    transform: translateY(-2rem);
+  }
+}
+.login .login-container .error {
+  text-align: left;
+  color: red;
+  font-weight: 600;
+  letter-spacing: 0.2px;
+  padding-left: 3.6rem;
+}
+.login .login-container .out {
+  background-color: rgba(141, 141, 141, 0.411);
+  width: 30rem;
+  border-radius: 10px;
+  padding-bottom: 2rem;
+}
+.login .login-container .login-right {
+  margin: auto;
+}
+.login .login-container .login-right .login-h3 {
+  padding: 1rem;
+  font-size: 1.2rem;
+}
+.login .login-container .login-right .login-form {
+  display: flex;
+  flex-direction: column;
+  width: 27rem;
+  animation: ani 0.25s ease-in;
+}
+@keyframes ani {
+  from {
+    opacity: 0;
+    transform: translateX(-3rem);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0rem);
+  }
+}
+.login .login-container .login-right .login-form .input-style {
+  box-sizing: border-box;
+  margin-left: 3rem;
+  outline: none;
+  padding-top: 1rem;
+  margin-top: 1rem;
+  padding-bottom: 1rem;
+  border: none;
+  border-radius: 7px;
+  box-shadow: none;
+  border: 1.4px solid transparent;
+}
+.login .login-container .login-right .login-form .input-style:focus {
+  border: 1.4px solid #6356ed;
+}
+.login .login-container .login-right .login-form .pl {
+  padding-left: 2rem;
+}
+.login .login-container .login-right .login-form .login-button {
+  margin-top: 1rem;
+  background-color: rgba(99, 86, 237, 0.7019607843);
+  cursor: pointer;
+  font-weight: 600;
+  color: white;
+  transition: all 0.2s;
+}
+.login .login-container .login-right .login-form .login-button:hover {
+  background-color: #6356ed;
+}
+.login .login-container .login-right .btn {
+  border: 2px solid #484848;
+  display: inline-block;
+  padding: 10px;
+  position: relative;
+  text-align: center;
+  transition: background 600ms ease, color 600ms ease;
+  font-size: 0.8rem;
+}
+.login .login-container .login-right .ex {
+  padding-left: 12px;
+  padding-right: 12px;
+}
+.login .login-container .login-right input[type=radio].toggle {
+  display: none;
+}
+.login .login-container .login-right input[type=radio].toggle + label {
+  cursor: pointer;
+  min-width: 50px;
+}
+.login .login-container .login-right input[type=radio].toggle + label:hover {
+  background: none;
+  color: #1a1a1a;
+}
+.login .login-container .login-right input[type=radio].toggle + label:after {
+  background: #1a1a1a;
+  background: #2310f7;
+  content: "";
+  height: 100%;
+  position: absolute;
+  top: 0;
+  transition: left 200ms cubic-bezier(0.77, 0, 0.175, 1);
+  width: 93.5%;
+  z-index: -1;
+}
+.login .login-container .login-right input[type=radio].toggle.toggle-left + label {
+  border-right: 0;
+}
+.login .login-container .login-right input[type=radio].toggle.toggle-left + label:after {
+  left: 100%;
+}
+.login .login-container .login-right input[type=radio].toggle.toggle-right + label {
+  margin-left: -5px;
+}
+.login .login-container .login-right input[type=radio].toggle.toggle-right + label:after {
+  left: -100%;
+}
+.login .login-container .login-right input[type=radio].toggle:checked + label {
+  cursor: default;
+  color: #fff;
+  transition: color 200ms;
+}
+.login .login-container .login-right input[type=radio].toggle:checked + label:after {
+  left: 0;
+}
+.login .semantic {
+  font-size: 1.6rem;
+  font-weight: 700;
+  text-align: left;
+  padding-left: 3.2rem;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  color: #6356ed;
+}
+.login .register {
+  text-align: end;
+  color: rgb(50, 50, 50);
+  font-weight: 500;
+  font-size: 0.7rem;
+}
+.login .register .reg {
+  cursor: pointer;
+  font-weight: 600;
+  color: rgb(71, 71, 239);
+}/*# sourceMappingURL=Login.css.map */
