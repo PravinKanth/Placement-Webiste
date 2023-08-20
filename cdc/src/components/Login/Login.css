@@ -1,12 +1,21 @@
 .login {
   max-width: 130rem;
   margin: 0 auto;
+  position: relative;
+}
+@keyframes gradientChange {
+  0%, 100% {
+    background-image: linear-gradient(144deg, #AF40FF, #5B42F3 50%, #00DDEB);
+  }
+  50% {
+    background-image: linear-gradient(144deg, #00DDEB, #5B42F3 50%, #AF40FF);
+  }
 }
 .login .img-kpr {
   display: block;
   width: 15rem;
   padding-left: 0.6rem;
-  padding-top: 0.7rem;
+  padding-top: 0.9rem;
 }
 .login .login-container {
   display: grid;

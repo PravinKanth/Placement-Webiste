@@ -1,65 +1,57 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./Student.css";
 import formimage from "../../assets/form-image.png";
 import Swal from "sweetalert2";
 import kprimage from "../../assets/kpr.jpg";
 import { Link, useNavigate } from "react-router-dom";
 import axios from 'axios';
+import norecords from "../../assets/norecords.png";
+import Cookies from "js-cookie";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
-const Student = ({setstudentbool}) => {
+
+
+const Student = () => {
   const navigate=new useNavigate();
-  const [profilePic, setProfilePic] = useState(null)
-  const[testimonial, setTestimonial] = useState(null)
-  const [cls,setCls]=useState("na")
-  const [cls1,setCls1]=useState("nalive1")
+  const [profilePic, setProfilePic] = useState(null);
+  const[testimonial, setTestimonial] = useState(null);
+  const [cls,setCls]=useState("na");
+  const [cls1,setCls1]=useState("nalive1");
   const [start,setStart]=useState("form");
+  const [student,setStudent]=useState([]);
+  const [color,setColor]=useState("red");
+  const [render1,setRender1]=useState(0);
+  const [cur,setCur]=useState(false);
+  const [isEmpty,setIsEmpty]=useState(false);
+  const [companies,setCompanies]=useState([]);
+  const [loader,setLoader]=useState(false);
+
 
   const [block, setBlock] = useState(0);
   const [formData, setFormData] = useState({
+    // roll:sessionStorage.getItem("studentroll"),
+    // firstName: sessionStorage.getItem("studentname"),
     roll:"",
     firstName: "",
-    // gender: "",
     degree: "",
     cgpa: "",
     passout: "",
     linkedin:"",
     company:"",
     salary:"",
-    type:"",
     profile:File,
     testimonial:File
   });
 
-  // console.log(formData.profile)
 
-  // const handleclick = (event, increment) => {
-  //   // event.preventDefault();
-    
-  //   if (block === 0) {
-  //     const { roll,firstName, gender, degree, cgpa, passout,linkedin,type } = formData;
-      
-  //     // Check if any of the required fields are empty
-  //     if (firstName.trim() === ""){return;} 
-  //     if (degree === ""){return;} 
-  //     if (cgpa === ""){return;} 
-  //     //   if (percentage === percentage<0 || >10){Swal.fire("Please enter the valid CGPA");return;} 
-  //     if (passout === ""){return;} 
-  //     if (linkedin === ""){return;} 
-      
-  //   //   if (passout < 2007 || passout > new Date().getFullYear() ){Swal.fire("Please enter the valid passout year");return;} 
-  //   }
-    
-  //   setBlock((prevBlock) => prevBlock + increment);
-  // };
+
+
 
   const handlevalues = (event) => {
     const { name, value, type, files } = event.target;
 
     if(type=='file'){
-      // setFormData((prevData)=>({
-      //   ...prevData,
-      //   [name]:files[0],
-      // }));
       console.log(name)
       if(name==='profile') {
         setProfilePic(files[0])
@@ -77,62 +69,175 @@ const Student = ({setstudentbool}) => {
       }));
     }
     console.log(event.target);
-    // console.log(name);
-    // console.log(value);
-    if(name ==="passout" && (value.length>4)){return;}
-    if(name ==="cgpa" && (value<0 || value>10)){return;}
-    setFormData((prevData) => ({
-      ...prevData,
-      
-      [name]: value,
-    }));
-    console.log(formData.profile)
   };
 
 
-  const logout = () =>{
-    setstudentbool(false);
+  const logout = async () =>{
+      const response= await axios.get("http://127.0.0.1:8000/logout/",{
+        withCredentials:true,
+      });
     navigate("/");
 
   };
 
+  // useEffect(() => {
+  //   const timer = setTimeout(() => {
+  //     setLoader(false);
+  //   }, 1000); 
+  
+  //   return () => clearTimeout(timer);
+  // }, [start]);
 
-  const handleSubmit = (event) => {
+
+  const handleSubmit = (event) => {   
+
+setLoader(true);
     event.preventDefault();
-
-    // console.log(profilePic)
-    const formDataToSend =new FormData();
-
-    // for(const key in formData){
-    //   formDataToSend.append(key,formData[key]);
-    // }
-    // formDataToSend.append('profile', files[0])
 
     console.log(profilePic)
     console.log(testimonial)
     formData.profile = profilePic
     formData.testimonial = testimonial
+
     axios.post('http://127.0.0.1:8000/student/', formData, {
       headers: { 'Content-Type': 'multipart/form-data' }
     })
       .then((response) => {
         console.log(response.data);
+        setCur(response.data);
+        
+        if(response.data=="Exists"){
+          toast("Your Data has been already Approved!");
+
+        }
+        else{
+          setProfilePic(null);
+          setTestimonial(null);
+    
+          setFormData({
+            ...formData,
+            degree: "",
+            cgpa: "",
+            passout: "",
+            linkedin:"",
+            company:"",
+            salary:"",
+          })
+          setCur("Done");
+          toast("Successfully Submitted!");
+          getStudent();
+
+          // setStart("status");
+          
+        }
+        setLoader(false);
       })
       .catch((error) => {
         console.log(error);
       });
-
-      // setstudentbool(false);
-      // navigate("/");
-      const formDataValues = {};
-      for (const [key, value] of formDataToSend.entries()) {
-        formDataValues[key] = value;
-      }
-    
-      console.log("dooooo");
-      console.log(formDataValues);
   };
 
+
+  // useEffect(()=>{
+    
+  // },[]);
+
+  useEffect(() => {
+      getstudentsession();
+      getStudent();
+      getcompany();
+      
+  }, []);
+
+    const getstudentsession = async () => {
+      setLoader(true);
+      try {
+        const response = await axios.get("http://127.0.0.1:8000/studentsession/",{
+          withCredentials: true,
+        });
+        console.log(response.data[0]);
+        setFormData({
+          ...formData,
+          roll:response.data[0].roll.toUpperCase(),
+          firstName:response.data[0].firstName
+        });
+      console.log(formData)
+
+      } catch (error) {
+        console.log(error);
+      }
+      // setLoader(false);
+    };
+  
+const getStudent = async() => {
+  // setLoader(true);
+  try{
+    const response = await axios.get("http://127.0.0.1:8000/getstudent/",{
+      withCredentials:true,
+    })
+
+    if(response.data==="Empty"){
+      setIsEmpty(true);
+    }
+    else{
+      setStudent(response.data);
+      setIsEmpty(false);
+    }
+
+    if (response.data[0].status === "REJECTED") {
+      setColor("red");
+    } else if (response.data[0].status == "APPROVED") {
+      setColor("green");
+    } else if (response.data[0].status == "PROCESSING") {
+      setColor("blue");
+    }
+    console.log(response);
+
+  }catch (error) {
+    console.log(error);
+  }
+
+  // setLoader(false);
+}
+
+
+const getcompany = async() => {
+  // setLoader(true);
+  try{
+    const response = await axios.get("http://127.0.0.1:8000/companydetails/",{
+      // withCredentials:true,
+    })
+
+    setCompanies(response.data);
+
+
+    console.log(response);
+
+  }catch (error) {
+    console.log(error);
+  }
+
+  setLoader(false);
+}
+
+
+const edit = () =>{
+  setCur(true);
+  setStart("form");
+  setFormData({
+    roll:student[0].roll_no,
+    firstName: student[0].firstName,
+    degree: student[0].degree,
+    cgpa: student[0].cgpa,
+    passout: student[0].passout,
+    linkedin:student[0].linkedin,
+    company:student[0].company,
+    salary:student[0].salary,
+  });
+
+
+
+}
 
 
   return (
@@ -145,7 +250,17 @@ const Student = ({setstudentbool}) => {
             </button>
             </div>
             <div className="nav1">
-            <button onClick={()=>{setCls1("nalive1");setCls("na");setStart("form");}} className={cls1}>
+            <button onClick={()=>{setCls1("nalive1");setCls("na");setStart("form");setCur(false);setFormData({
+                  ...formData,
+                  degree: "",
+                  cgpa: "",
+                  passout: "",
+                  linkedin:"",
+                  company:"",
+                  salary:"",
+                  testimonial:null,
+                  profile:null
+            })}} className={cls1}>
               <p>Form</p>
             </button>
             </div>
@@ -156,8 +271,17 @@ const Student = ({setstudentbool}) => {
 
         </button>
       </div>
-      <h1>WELCOME &nbsp;{sessionStorage.getItem("studentname")} !</h1>
-      {start=="form" && (<div class="subscribe">
+      <h1 className="welcome">WELCOME &nbsp;{formData.firstName} !</h1>
+      {start=="form" && (<div key="form" class="subscribe">
+        <div className="outer">
+      {cur && <div onClick={()=>{
+        setStart("status");
+      }} class="close-container">
+  <div class="leftright"></div>
+  <div class="rightleft"></div>
+  <label class="close">close</label>
+</div>}
+</div>
           <form onSubmit={handleSubmit} encType="multipart/form-data">     
                   <div className="roll">
                   <div>
@@ -167,13 +291,13 @@ const Student = ({setstudentbool}) => {
                       name="roll"
                       id="roll"
                       // value={formData.roll}
-                      value={sessionStorage.getItem("studentroll")}
                       // minLength="7"
                       // maxLength="7"
-                      // placeholder="Roll No"
+                      placeholder="Roll No"
+                      value={formData.roll}
                       // onChange={handlevalues}
+                      // required
                       disabled
-                      required
                     />
                   </div>
                 </div>
@@ -186,11 +310,13 @@ const Student = ({setstudentbool}) => {
           className="input1 tr"
           name="firstName"
           id="first-name"
-          value={sessionStorage.getItem("studentname")}
-          // placeholder="Name"
-          // onChange={handlevalues}
+
+          value={formData.firstName}
+          placeholder="Name"
           disabled
-          required
+          // onChange={handlevalues}
+          // disabled
+          // required
         />
       </div>
     </div>
@@ -203,10 +329,10 @@ const Student = ({setstudentbool}) => {
         required
       >
         <option value="">Select Degree</option>
-        <option value="BIO-MEDICAL">
+        <option value="BME">
           B.E - Biomedical Engineering
         </option>
-        <option value="CIVIL">
+        <option value="Civil">
           B.E - Civil Engineering
         </option>
         <option value="CSE">
@@ -218,14 +344,14 @@ const Student = ({setstudentbool}) => {
         <option value="EEE">
           B.E - Electricals and Electronics Engineering
         </option>
-        <option value="MECH">
+        <option value="Mech">
           B.E - Mechanical Engineering
         </option>
-        <option value="AI & DS">
+        <option value="AI&DS">
           B.E - Artificial Intelligence and Data Science
           Engineering
         </option>
-        <option value="CHEMICAL">
+        <option value="Chemical">
           B.E - Chemical Engineering
         </option>
       </select>
@@ -280,35 +406,23 @@ const Student = ({setstudentbool}) => {
       </div>
     </div>
 
-    <div className="company">
-      <div>
-        <input
-          type="text"
-          className="input1 tr"
-          name="company"
-          id="company"
-          value={formData.company}
-          placeholder="Company Name"
-          onChange={handlevalues}
-          required
-        />
-      </div>
-    </div>
 
-    <div className="company-type">
-      <select
-        className="sel1 tr"
-        name="type"
-        value={formData.type}
+    <select
+        className="input1 sel tr"
+        name="company"
+        value={formData.company}
         onChange={handlevalues}
         required
       >
-        <option value="">Company Type</option>
-        <option value="IT">IT</option>
-        <option value="NON - IT">Non - IT</option>
-        {/* <option value="TRANSGENDER">Transgender</option> */}
+        <option value="">Select Company</option>
+        {companies.map((company)=>(
+          <option value={company.companyname}>{company.companyname}</option>
+        ))}
+
+
       </select>
-    </div>
+
+
 
     <div className="salary">
       <div>
@@ -318,7 +432,7 @@ const Student = ({setstudentbool}) => {
           name="salary"
           id="salary"
           value={formData.salary}
-          placeholder="Salary"
+          placeholder="Salary (in lakhs)"
           step="0.10"
           onChange={handlevalues}
           required
@@ -336,6 +450,7 @@ const Student = ({setstudentbool}) => {
           id="testimonial"
           placeholder="Upload your testimonial"  
           onChange={handlevalues}
+          // value={testimonial}
           required
         />
 
@@ -343,9 +458,6 @@ const Student = ({setstudentbool}) => {
     </div>
 
     <div className="profiles">
-    {/* <div className="label1">
-        <label>Profile</label>
-      </div> */}
       <div>
         <span className="l414">&nbsp;&nbsp;Profile </span><input
           type="file"
@@ -354,16 +466,81 @@ const Student = ({setstudentbool}) => {
           id="profile"
           placeholder="No file chosen" 
           onChange={handlevalues}
+          // value={profilePic}
           required
         />
 
       </div>
     </div>
                   
-      <button class="submit-btn1" type="submit">SUBMIT</button>
+      <button className="submit-btn1" type="submit">SUBMIT</button>
             
           </form>
           </div>)}
+
+
+          {start=="status" && (<>
+            {isEmpty ? (<div class="empty-state">
+  <div className="empty-state__content">
+    <div className="empty-state__icon">
+      <img src={norecords} alt=""/>
+    </div>
+    <div className="empty-state__message">No record has been added yet.</div>
+    <div className="empty-state__help">
+      Add a new record by simply clicking the form button on top right side.
+    </div>
+  </div>
+</div>):(<div key="status" className="content">
+            <div className="card">
+              <div className="firstinfo">
+                <img src={"http://127.0.0.1:8000/"+student[0].profile} />
+                <div className="profileinfo">
+                  <h1>{student[0].firstName}</h1>
+                  <h3>{student[0].roll_no}</h3>
+                  <p className="bio"><span>Degree: </span>{student[0].degree}</p>
+                  <p className="bio"><span>CGPA: </span>{student[0].cgpa}</p>
+                  <p className="bio"><span>Passout: </span>{student[0].passout}</p>
+                  <p className="bio"><span>Linkedin Link: </span>{student[0].linkedin}</p>
+                  <p className="bio"><span>Company: </span>{student[0].company}</p>
+                  <p className="bio"><span>Company Type: </span>{student[0].type}</p>
+                  <p className="bio"><span>Salary: </span>{student[0].salary}LPA</p>
+                  <p className="bio"><span>Status: </span><span style={{color}}className="span1">{student[0].status}</span></p>
+                  {student[0].status!="APPROVED" && (
+                  
+                    <button onClick={edit} className="edit-button">
+               <svg className="edit-svgIcon" viewBox="0 0 512 512">
+                    <path d="M410.3 231l11.3-11.3-33.9-33.9-62.1-62.1L291.7 89.8l-11.3 11.3-22.6 22.6L58.6 322.9c-10.4 10.4-18 23.3-22.2 37.4L1 480.7c-2.5 8.4-.2 17.5 6.1 23.7s15.3 8.5 23.7 6.1l120.3-35.4c14.1-4.2 27-11.8 37.4-22.2L387.7 253.7 410.3 231zM160 399.4l-9.1 22.7c-4 3.1-8.5 5.4-13.3 6.9L59.4 452l23-78.1c1.4-4.9 3.8-9.4 6.9-13.3l22.7-9.1v32c0 8.8 7.2 16 16 16h32zM362.7 18.7L348.3 33.2 325.7 55.8 314.3 67.1l33.9 33.9 62.1 62.1 33.9 33.9 11.3-11.3 22.6-22.6 14.5-14.5c25-25 25-65.5 0-90.5L453.3 18.7c-25-25-65.5-25-90.5 0zm-47.4 168l-144 144c-6.2 6.2-16.4 6.2-22.6 0s-6.2-16.4 0-22.6l144-144c6.2-6.2 16.4-6.2 22.6 0s6.2 16.4 0 22.6z"></path>
+                  </svg>
+</button>)}
+                  
+                </div>
+                <img className="offer" src={"http://127.0.0.1:8000/"+student[0].testimonial}/>
+              </div>
+            </div>
+            <div className="badgescard"> 
+            </div>
+          </div>)}
+          </>
+          
+          )}
+
+{cur=="Exists" && <div>
+       <ToastContainer />
+     </div>}
+
+     {cur=="Done" && <div>
+       <ToastContainer />
+     </div>}
+
+
+               {/* LOADER */}
+
+     {loader &&<div class="spinner">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>}
+
       </div>
     </div>
   );

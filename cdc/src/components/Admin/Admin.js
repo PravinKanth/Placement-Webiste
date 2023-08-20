@@ -119,18 +119,18 @@ const Admin = ({setadminbool}) => {
         <h1 className="placed">PLACED STUDENTS IN BE / BTECH</h1>
         <div className="filter">
           <div className="dropdowns">
-        <div className="dropdown">
-          <button className="filter-btn">{year} &nbsp;&nbsp;&nbsp;&#x25BC;</button>
-          {bool1 && (
-          <div className="dropdown-content">
-          <a onClick={()=>{setYear("PASSOUT");setBool1(false)}}>PASSOUT</a>
-          <a onClick={()=>{setYear("2024");setBool1(false)}}>2024</a>
-          <a onClick={()=>{setYear("2023");setBool1(false)}}>2023</a>
-          <a onClick={()=>{setYear("2022");setBool1(false)}}>2022</a>
-          <a onClick={()=>{setYear("2021");setBool1(false)}}>2021</a>
+          <div className="dropdown">
+            <button className="filter-btn">{year} &nbsp;&nbsp;&nbsp;&#x25BC;</button>
+            {bool1 && (
+            <div className="dropdown-content">
+            <a onClick={()=>{setYear("PASSOUT");setBool1(false)}}>PASSOUT</a>
+            <a onClick={()=>{setYear("2024");setBool1(false)}}>2024</a>
+            <a onClick={()=>{setYear("2023");setBool1(false)}}>2023</a>
+            <a onClick={()=>{setYear("2022");setBool1(false)}}>2022</a>
+            <a onClick={()=>{setYear("2021");setBool1(false)}}>2021</a>
 
-        </div>)}
-        </div>
+          </div>)}
+          </div>
 
         <div className="dropdown">
           <button  className="filter-btn dept">{department} &nbsp;&nbsp;  &#x25BC;</button>
@@ -158,7 +158,6 @@ const Admin = ({setadminbool}) => {
         </div>
         </div>
 
-        {/* <input type="text" value={letter} onChange={(event)=>{setLetter(event.target.value)}}></input> */}
         <div className="search">
             <input id='search-btn' type='checkbox'/>
             <label for='search-btn'>Show search bar</label>
@@ -172,7 +171,6 @@ const Admin = ({setadminbool}) => {
                 <tr>
                   <th><h1>PHOTO</h1></th>
                   <th><h1>DETAILS</h1></th>
-                  {/* <th><h1>VIDEO</h1></th> */}
                   <th><h1>COMPANY</h1></th>
                   <th><h1>OFFER LETTER</h1></th>
                   <th><h1>SALARY</h1></th>

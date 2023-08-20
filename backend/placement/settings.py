@@ -39,19 +39,24 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'myapp',
+    'psycopg2',
     'corsheaders',
 ]
 
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
-        'corsheaders.middleware.CorsMiddleware',
+    
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+
 ]
+
+# SESSION_ENGINE = 'django.contrib.sessions.backends.db'
 
 ROOT_URLCONF = 'placement.urls'
 import os
@@ -137,6 +142,18 @@ MEDIA_ROOT=BASE_DIR/'media'
 
 MEDIA_URL='/media/'
 
+
+# CORS_ALLOW_ALL_ORIGINS = True
+CORS_ALLOW_CREDENTIALS = True
+SESSION_COOKIE_SAMESITE = None
+SESSION_COOKIE_SECURE = True
+
+
+CORS_ALLOWED_ORIGINS = [
+    "http://127.0.0.1:3000",
+    "http://localhost:3000",
+]
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
@@ -147,11 +164,32 @@ STATICFILES_DIRS=[
 ]
 
 
-CORS_ORIGIN_WHITELIST = [
-    'http://localhost:3000',
-]
+# CORS_ORIGIN_WHITELIST = [
+#     'http://localhost:3000',
+# ]
+
+# SESSION_COOKIE_AGE=12000
+
+# SESSION_COOKIE_SECURE = False
 
 
 
+# SESSION_COOKIE_SAMESITE = 'lax'
 
+# SESSION_COOKIE_NAME = 'sessionid'
 
+# CORS_ALLOW_HEADERS = [
+#     'Accept',
+#     'Accept-Language',
+#     'Content-Language',
+#     'Content-Type',
+#     'Authorization',  # Add any custom headers used in your requests
+# ]
+
+# SESSION_ENGINE = 'django.contrib.sessions.backends.db'
+
+# SESSION_ENGINE = 'django.contrib.sessions.backends.signed_cookies'
+
+# SESSION_SAVE_EVERY_REQUEST =True
+
+# SESSION_COOKIE_NAME="cookie"

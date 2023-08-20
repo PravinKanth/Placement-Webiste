@@ -8,10 +8,10 @@ class Student(models.Model):
     passout=models.CharField(max_length=100)
     linkedin=models.CharField(max_length=100)
     company=models.CharField(max_length=100)
-    type=models.CharField(max_length=100)
     salary=models.CharField(max_length=100)
     testimonial=models.ImageField(upload_to='testimonials/')
     profile=models.ImageField(upload_to='profiles/')
+    status=models.CharField(max_length=30)
 
 class Register_Coordinator(models.Model):
     coordinatorname=models.CharField(max_length=100)
@@ -24,5 +24,9 @@ class Register_Student(models.Model):
     studentname=models.CharField(max_length=100)
     studentmailid=models.CharField(max_length=100)
     studentpassword=models.CharField(max_length=100)   
+
+class Company(models.Model):
+    companyname=models.CharField(max_length=100)
+    companytype=models.CharField(max_length=100)
 
 

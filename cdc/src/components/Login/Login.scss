@@ -2,6 +2,19 @@
     // padding-top: 1rem;
     max-width: 130rem;
     margin: 0 auto;
+    position: relative;
+
+
+      
+      @keyframes gradientChange {
+        0%, 100% {
+          background-image: linear-gradient(144deg, #AF40FF, #5B42F3 50%, #00DDEB);
+        }
+      
+        50% {
+          background-image: linear-gradient(144deg, #00DDEB, #5B42F3 50%, #AF40FF);
+        }
+      }
 
     .img-kpr{
         display: block;
@@ -9,7 +22,7 @@
         // margin-left: auto;
         // padding-right: 1rem;
         padding-left: 0.6rem;
-        padding-top: 0.7rem;
+        padding-top: 0.9rem;
     }
 
 .login-container{
